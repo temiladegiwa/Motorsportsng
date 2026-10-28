@@ -1,6 +1,7 @@
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import TabBar from '@/components/TabBar';
 
 export const metadata = {
   title: 'MotorSports NG — Nigeria’s Home for F1, MotoGP & IndyCar',
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
         <Nav />
         {children}
         <Footer />
+        <TabBar />
       </body>
     </html>
   );

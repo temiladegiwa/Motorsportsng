@@ -21,6 +21,15 @@ export default function Home() {
       </header>
       <Marquee />
       <WeekGrid />
+      <section id="explore">
+        <h2>Explore</h2>
+        <div className="wk">
+          <Link className="wc c-f" href="/standings"><small>Leaderboards</small><b>Championship standings</b><span>F1, MotoGP and IndyCar · drivers and constructors</span></Link>
+          <Link className="wc c-m" href="/road-to-f1"><small>News</small><b>Road to F1</b><span>F2 champions and the 2026 title fight</span></Link>
+          <Link className="wc c-i" href="/calendar"><small>Calendar</small><b>Every race, every series</b><span>Filter by F1, MotoGP, IndyCar and community</span></Link>
+          <Link className="wc" href="/podcast"><small>Podcast</small><b>Grid Pod Africa</b><span>New episode every Thursday</span></Link>
+        </div>
+      </section>
       <section id="podcast"><PodcastCard /></section>
       <section id="paddock">
         <div className="three">
