@@ -1,23 +1,10 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { S as S0, C as C0, P, TM } from '@/lib/data';
+import { useState } from 'react';
+import { TM } from '@/lib/data';
+import useStandings from '@/lib/useStandings';
+import Photo from './Photo';
 
 const SL = [['f', 'F1'], ['m', 'MotoGP'], ['i', 'IndyCar']];
-
-function Photo({ n }) {
-  const [bad, setBad] = useState(false);
-  const w = n.split(' ');
-  const ini = w[0].charAt(0) + w[w.length - 1].charAt(0);
-  const u = P[n];
-  return (
-    <span className="ph">
-      {ini}
-      {u && !bad && (
-        <img className={u.indexOf('f1-fansite') > -1 ? 'f1' : ''} src={u} alt={n} loading="lazy" referrerPolicy="no-referrer" onError={() => setBad(true)} />
-      )}
-    </span>
-  );
-}
 
 function Badge({ n }) {
   const l = n.toLowerCase();
@@ -30,38 +17,9 @@ function Badge({ n }) {
 }
 
 export default function Standings() {
-  const [S, setS] = useState(S0);
-  const [C, setC] = useState(C0);
+  const { S, C } = useStandings();
   const [sc, setSc] = useState('f');
   const [md, setMd] = useState('d');
-
-  useEffect(() => {
-    const J = 'https://api.jolpi.ca/ergast/f1/current/';
-    Promise.all([
-      fetch(J + 'driverstandings.json').then((r) => r.json()),
-      fetch(J + 'constructorstandings.json').then((r) => r.json()),
-    ]).then((a) => {
-      const dl = a[0].MRData.StandingsTable.StandingsLists[0];
-      const cl = a[1].MRData.StandingsTable.StandingsLists[0];
-      if (!dl || !cl) return;
-      const kn = {};
-      S0.f[1].forEach((r) => { kn[r[0].split(' ').pop().toLowerCase()] = r[0]; });
-      setS((s) => ({
-        ...s,
-        f: ['Live · after round ' + dl.round, dl.DriverStandings.slice(0, 10).map((d) => {
-          const fn = d.Driver.familyName;
-          const nm = kn[fn.toLowerCase()] || d.Driver.givenName + ' ' + fn;
-          const c = d.Constructors;
-          return [nm, c.length ? c[c.length - 1].name : '', +d.points];
-        })],
-      }));
-      setC((c) => ({
-        ...c,
-        f: ['Live · constructors after round ' + cl.round, cl.ConstructorStandings.slice(0, 10).map((x) => [x.Constructor.name, x.wins + ' wins', +x.points])],
-      }));
-    }).catch(() => {});
-  }, []);
-
   const D = md === 'd' ? S[sc] : C[sc];
   return (
     <>
