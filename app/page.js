@@ -2,6 +2,7 @@ import Link from 'next/link';
 import NextUp from '@/components/NextUp';
 import Marquee from '@/components/Marquee';
 import WeekGrid from '@/components/WeekGrid';
+import PartyTickets from '@/components/PartyTickets';
 import Snapshot from '@/components/Snapshot';
 import UpcomingList from '@/components/UpcomingList';
 import NewsTeaser from '@/components/NewsTeaser';
@@ -26,6 +27,7 @@ export default function Home() {
       <WeekGrid />
       <Snapshot />
       <UpcomingList />
+      <PartyTickets />
       <section id="podcast"><PodcastCard /></section>
       <NewsTeaser />
       <section id="paddock">

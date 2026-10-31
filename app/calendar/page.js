@@ -1,3 +1,4 @@
+import PartyTickets from '@/components/PartyTickets';
 import CalendarList from '@/components/CalendarList';
 export const metadata = { title: 'Race calendar | MotorSports NG' };
 export default function Page() {
@@ -7,6 +8,7 @@ export default function Page() {
         <h2>Next on the calendar</h2>
         <CalendarList />
       </section>
+      <PartyTickets />
     </main>
   );
 }
